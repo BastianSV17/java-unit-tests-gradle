@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -302,5 +304,27 @@ public class StudentTest {
         //When the student enlists in the said section
         //Then the student should unsuccessfully enlist the said section
         assertThrows(SubjectNotInProgramException.class, () -> student.enlist(sec1));
+    }
+
+    @Test
+    public void test_student_objects_should_have_same_hashCode_if_same_student_number() {
+        Student student1 = new Student(1, Collections.emptyList(), DEFAULT_PROGRAM);
+        Student student2 = new Student(1, Collections.emptyList(), DEFAULT_PROGRAM);
+        assertEquals(student1.hashCode(), student2.hashCode());
+    }
+
+    @Test
+    public void test_comparing_student_object_with_different_class_should_return_false() {
+        Student student1 = new Student(1, Collections.emptyList(), DEFAULT_PROGRAM);
+        Object obj = new Object();
+        assertFalse(student1.equals(obj));
+    }
+
+    @Test
+    public void test_equals_should_be_transitive() {
+        Student student1 = new Student(1, Collections.emptyList(), DEFAULT_PROGRAM);
+        Student student2 = new Student(1, Collections.emptyList(), DEFAULT_PROGRAM);
+        Student student3 = new Student(1, Collections.emptyList(), DEFAULT_PROGRAM);
+        assertTrue(student1.equals(student2) && student2.equals(student3) && student1.equals(student3));
     }
 }

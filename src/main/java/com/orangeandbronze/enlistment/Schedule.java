@@ -41,6 +41,14 @@ class Schedule {
         result = 31 * result + (period != null ? period.hashCode() : 0);
         return result;
     }
+
+    public Days getDays() {
+        return days;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
 }
 
 enum Days{

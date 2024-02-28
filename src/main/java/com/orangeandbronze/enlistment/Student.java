@@ -113,4 +113,8 @@ class Student {
     public int hashCode(){
         return studentNumber;
     }
+
+    public int getStudentNumber() {
+        return studentNumber;
+    }
 }
